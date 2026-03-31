@@ -1,5 +1,9 @@
 {
     "title": "Dhurandhar",
     "description": "Shashwat Sachdev, Madhubanti Bagchi, Jasmine Sandlas",
-    "cover": "cover.jpg"
+    "cover": "cover.jpg",
+    "songs": [
+        "Phir-Se.mp3",
+        "Shararat.mp3"
+    ]
 }

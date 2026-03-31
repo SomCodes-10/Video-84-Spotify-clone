@@ -1,5 +1,14 @@
 {
     "title": "Classic Bollywood",
     "description": "Kishore Kumar, Shaan, Alka Yagnik",
-    "cover": "cover.jpg"
+    "cover": "cover.jpg",
+    "songs": [
+        "Bharat - The Diplomat.mp3",
+        "Chand Sifarish.mp3",
+        "Chunnari Chunnari.mp3",
+        "Dil Kaa Jo Haal Hai.mp3",
+        "Dil Ne Yeh Kaha Hain.mp3",
+        "Ek Do Teen Char.mp3",
+        "Kaate Nahi Kat Te.mp3"
+    ]
 }

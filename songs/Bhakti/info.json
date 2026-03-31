@@ -1,5 +1,9 @@
 {
     "title": "Bhakti",
     "description": "Jay Shree Ram",
-    "cover": "cover.jpg"
+    "cover": "cover.jpg",
+    "songs":[
+        "Mere Ghar Ram Aaye Hai.mp3",
+        "Shree Hanuman Chalisa.mp3"
+    ]
 }

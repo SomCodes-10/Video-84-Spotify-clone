@@ -1,5 +1,8 @@
 {
     "title": "In Dino",
     "description": "Pritam, Soham, Sayeed Quadri",
-    "cover": "cover.jpg"
+    "cover": "cover.jpg",
+    "songs": [
+        "In Dino.mp3"
+    ]
 }

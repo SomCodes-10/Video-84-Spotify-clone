@@ -16,7 +16,8 @@ function formatTime(seconds) {
 }
 
 async function getSongs(folder) {
-    let a = await fetch(`http://127.0.0.1:3000/${folder}/`);
+    // let a = await fetch(`http://127.0.0.1:3000/${folder}/`);
+    let res = await fetch(`songs/${folder}/info.json`);
     let response = await a.text();
 
     let element = document.createElement("div");

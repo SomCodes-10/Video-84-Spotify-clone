@@ -1,5 +1,8 @@
 {
     "title": "Dance hits",
     "description": "Javed Ali, Shankar Mahadevan, Alisha Chinai",
-    "cover": "cover.jpg"
+    "cover": "cover.jpg",
+    "songs": [
+        "Kajra Re.mp3"
+    ]
 }
