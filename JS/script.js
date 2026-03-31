@@ -18,27 +18,13 @@ function formatTime(seconds) {
 async function getSongs(folder) {
     // let a = await fetch(`http://127.0.0.1:3000/${folder}/`);
     let res = await fetch(`songs/${folder}/info.json`);
-    let response = await a.text();
-
-    let element = document.createElement("div");
-    element.innerHTML = response;
-    let as = element.getElementsByTagName("a")
-
-    let songs = []
-
-    for (let index = 0; index < as.length; index++) {
-        const element = as[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(decodeURIComponent(element.getAttribute("href")).split("\\").pop())
-        }
-    }
-    return (songs)
-
+    let data = await res.json();
+    return data.songs;
 }
 
 const playMusic = (track, pause = false) => {
 
-    currentSong.src = `http://127.0.0.1:3000/${currentFolder}/` + track
+   currentSong.src = `${currentFolder}/` + track
     if (!pause) {
         currentSong.play();
         document.querySelector("#play img").src = "img/pause.svg"
@@ -51,7 +37,7 @@ const playMusic = (track, pause = false) => {
 
 // Display all the album on the page
 async function displaySongs(folder) {
-    currentFolder = folder;
+    currentFolder = `songs/${folder}`;
     songs = await getSongs(folder);         // fetch songs for this folder
     let songUL = document.querySelector(".songList ul");
     songUL.innerHTML = "";                  // clear old songs first
@@ -68,7 +54,7 @@ async function displaySongs(folder) {
             </div>
         </li>`;
     }
-    attachSongListeners(folder);            // reattach click listeners
+    attachSongListeners();            // reattach click listeners
 }
 
 function attachSongListeners() {
@@ -85,29 +71,10 @@ function attachSongListeners() {
     })
 }
 
-async function getFolders() {
-    let a = await fetch("http://127.0.0.1:3000/songs/");
-    let response = await a.text();
-    let element = document.createElement("div");
-    element.innerHTML = response;
-    let as = element.getElementsByTagName("a");
-    let folders = [];
-    for (let i = 0; i < as.length; i++) {
-        let href = as[i].getAttribute("href");
-        let decoded = decodeURIComponent(href);
-        // split on both / and \ and get last non-empty part
-        let parts = decoded.split(/[/\\]/);
-        let folder = parts.filter(p => p).pop();
-        // skip if it looks like a file or parent dir
-        if (folder && !folder.includes(".") && folder !== "..") {
-            folders.push(folder);
-        }
-    }
-    return folders;
-}
+
 async function getPlaylistInfo(folder) {
     try {
-        let response = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`);
+        let response = await fetch(`songs/${folder}/info.json`);
         let data = await response.json();
         return data;
     } catch (e) {
@@ -118,8 +85,8 @@ async function getPlaylistInfo(folder) {
 }
 
 async function main() {
-    await displaySongs("songs/Aashiqui 2");
-    let folders = await getFolders();
+    await displaySongs("Aashiqui 2");
+    let folders = ["Aashiqui 2","Bhakti","Cult hits","Dance hits","Dhurandhar","In Dino"];
     let cardContainer = document.querySelector(".cardContainer");
     cardContainer.innerHTML = "";  // clear hardcoded cards
 
@@ -133,7 +100,7 @@ async function main() {
                     <path d="M9 7L17 12L9 17Z" fill="black" />
                 </svg>
             </div>
-            <img src="http://127.0.0.1:3000/songs/${folder}/${info.cover}" alt="">
+           <img src="songs/${folder}/${info.cover}" alt="">
             <h2>${info.title}</h2>
             <p>${info.description}</p>
         </div>`;
@@ -146,14 +113,14 @@ async function main() {
         // card click — just loads songs into library
         card.addEventListener("click", async () => {
             let folder = card.dataset.folder;
-            await displaySongs(`songs/${folder}`);
+            await displaySongs(folder);
         })
 
         // play button click — loads and plays
         card.querySelector(".play").addEventListener("click", async (e) => {
             e.stopPropagation();  // prevents card click from also firing
             let folder = card.dataset.folder;
-            await displaySongs(`songs/${folder}`);
+            await displaySongs(folder);
             playMusic(songs[0]);
         })
     })
