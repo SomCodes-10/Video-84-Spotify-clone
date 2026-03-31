@@ -106,7 +106,7 @@ async function main() {
         </div>`;
     }
 
-    playMusic(songs[0], true)
+    // playMusic(songs[0], true)
 
     // card click listeners
     Array.from(document.querySelectorAll(".card")).forEach(card => {
